@@ -1,0 +1,49 @@
+import java.io.*;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    /*
+     * Complete the timeConversion function below.
+     */
+    static String timeConversion(String s) {
+        /*
+         * Write your code here.
+         */
+        String[] time = s.split(":");
+        String hr = time[0];
+        String min = time[1];
+        String sec = time[2].substring(0, 2);
+        String AMOrPM = time[2].substring(2, time[2].length()) ;
+        if(AMOrPM.equals("AM")){
+            if(hr.equals("12"))
+                return "00" + ":" + min + ":"+ sec;
+            else
+                return hr + ":" + min + ":" + sec;
+        }
+        else{
+            if(hr.equals("12"))
+                return hr + ":" + min + ":" + sec;
+            else
+                return String.valueOf(Integer.parseInt(hr) + 12) + ":" + min + ":" + sec;
+        }
+    }
+
+    private static final Scanner scan = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scan.nextLine();
+
+        String result = timeConversion(s);
+
+        bw.write(result);
+        bw.newLine();
+
+        bw.close();
+    }
+}
